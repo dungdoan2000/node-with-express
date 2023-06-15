@@ -5,10 +5,17 @@ const handlerbars = require('express-handlebars');
 const app = express();
 const port = 3000;
 
+const route = require('./routes');
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(morgan('combined'));
+app.use(express.urlencoded({
+    extended: true
+}));
+app.use(express.json());
+
+// app.use(morgan('combined'));
 
 app.engine('hbs', handlerbars.engine({
     extname: '.hbs'
@@ -16,17 +23,8 @@ app.engine('hbs', handlerbars.engine({
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname,'resources/views'));
 
-app.get("/", (req,res)=>{
-    res.render('home')
-});
+route(app);
 
-app.get("/search", (req,res)=>{
-    res.render('search')
-});
-
-app.get("/news", (req,res)=>{
-    res.render('news')
-});
 
 app.listen(port, ()=>{
     console.log(`Example app listening at http://localhost:${port}`)
