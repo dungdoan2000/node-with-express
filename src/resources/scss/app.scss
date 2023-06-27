@@ -1,7 +1,11 @@
 @import 'variable';
 
-h1 {
-    color: $titile-color;
+.row {
+    color: $text-color;
     font-size: $text-size;
+}
+
+.text{
+    color: $titile-color;
 }
 
